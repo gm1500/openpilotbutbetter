@@ -36,8 +36,9 @@ class CarState(CarStateBase):
     self.moving_backward = pt_cp.vl["EBCMWheelSpdRear"]["MovingBackward"] != 0
     
     # BSM
-    ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 1
-    ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 1
+    if "RADAR_RELATED" in pt_cp.vl:  # Check if "RADAR_RELATED" to stop breaking volts lol
+      ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 1
+      ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 1
     
     # Variables used for avoiding LKAS faults
     self.loopback_lka_steering_cmd_updated = len(loopback_cp.vl_all["ASCMLKASteeringCmd"]["RollingCounter"]) > 0

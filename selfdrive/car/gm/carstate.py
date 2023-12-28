@@ -35,7 +35,7 @@ class CarState(CarStateBase):
     self.pscm_status = copy.copy(pt_cp.vl["PSCMStatus"])
     self.moving_backward = pt_cp.vl["EBCMWheelSpdRear"]["MovingBackward"] != 0
     
-    if "RADAR_RELATED" in pt_cp.vl:  # Check if "RADAR_RELATED" to stop breaking volts lol
+    if self.CP.networkLocation == NetworkLocation.fwdCamera:  # Check if "RADAR_RELATED" to stop breaking volts lol
       ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 0
       ret.leftBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 0
     

@@ -36,8 +36,8 @@ class CarState(CarStateBase):
     self.moving_backward = pt_cp.vl["EBCMWheelSpdRear"]["MovingBackward"] != 0
     
     if self.CP.networkLocation == NetworkLocation.fwdCamera:  # Check if "RADAR_RELATED" to stop breaking volts lol
-      ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 0
-      ret.leftBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 0
+      ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 1
+      ret.leftBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 1
     
     
     # Variables used for avoiding LKAS faults

@@ -35,10 +35,10 @@ class CarState(CarStateBase):
     self.pscm_status = copy.copy(pt_cp.vl["PSCMStatus"])
     self.moving_backward = pt_cp.vl["EBCMWheelSpdRear"]["MovingBackward"] != 0
     
-    # BSM
-    #if "RADAR_RELATED" in pt_cp.vl:  # Check if "RADAR_RELATED" to stop breaking volts lol
-    ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 0
-    ret.leftBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 0
+    if "RADAR_RELATED" in pt_cp.vl:  # Check if "RADAR_RELATED" to stop breaking volts lol
+      ret.rightBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_RIGHT"] == 0
+      ret.leftBlindspot = pt_cp.vl["RADAR_RELATED"]["BSM_LEFT"] == 0
+    
     
     # Variables used for avoiding LKAS faults
     self.loopback_lka_steering_cmd_updated = len(loopback_cp.vl_all["ASCMLKASteeringCmd"]["RollingCounter"]) > 0
@@ -151,7 +151,7 @@ class CarState(CarStateBase):
       ("ECMAcceleratorPos", 80),
     ]
 
-    messages.append(("RADAR_RELATED", 10)) # bsm radar to 10hz
+    messages.append(("RADAR_RELATED", 0))
 
     # Used to read back last counter sent to PT by camera
     if CP.networkLocation == NetworkLocation.fwdCamera:

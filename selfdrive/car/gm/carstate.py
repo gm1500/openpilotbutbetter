@@ -151,13 +151,12 @@ class CarState(CarStateBase):
       ("ECMAcceleratorPos", 80),
     ]
 
-    messages.append(("RADAR_RELATED", 0))
-
     # Used to read back last counter sent to PT by camera
     if CP.networkLocation == NetworkLocation.fwdCamera:
       messages += [
         ("ASCMLKASteeringCmd", 0),
       ]
+      messages.append(("RADAR_RELATED", 0))
 
     if CP.transmissionType == TransmissionType.direct:
       messages.append(("EBCMRegenPaddle", 50))
